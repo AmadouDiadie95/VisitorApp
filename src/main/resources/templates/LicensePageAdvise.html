@@ -1,0 +1,17 @@
+<script> 
+	alert("Clé de Licence Invalide, Veuillez saisir une clé Valide !!!") ;
+</script>
+<div th:replace="StartPage"> </div>
+<div class="" style="margin:30px;">
+    <div class="col-md-6" style="margin-left: 50px;">
+<form  th:action="@{/LicenseAdd}" th:object="${LicenseModel}" method="post">
+    <div class="form-group">
+      <label >License Key</label>
+      <input type="text" class="form-control" placeholder="exemple : AAAA-BBBB-CCCC-DDDD " th:field="*{licenseKey}" required>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your License with anyone else.</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+</div>
+<div th:replace="EndPage"> </div> 

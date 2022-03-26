@@ -1,0 +1,150 @@
+<div th:replace="StartPage"> </div>
+
+<!-- Form de Verification -->
+<div class="" style="margin:30px;">
+  <div class="row" style="margin-left: 50px;">
+		<form class="form-row form-control-sm" th:action="@{/VisiteurFormReceive}"  method="post">
+			<div class = "col-md-4">
+			  <div class="form-group m-3">
+				<label>Nom : </label>
+				<p> <strong th:text="${visiteurAvecDonnees.nom}"> </strong> </p> 
+			  </div>
+			  <div class="form-group m-3">
+				<label>Prenom :</label>
+				<p> <strong th:text="${visiteurAvecDonnees.prenom}"> </strong> </p>
+			  </div>
+			  <div class="form-group m-3"> 
+			<label>Pièce d'identité :</label> <br>
+			<p> <strong th:text="${visiteurAvecDonnees.piece_identite}"> </strong> </p>
+			</div>
+			<div class="form-group m-3">
+			  <label >Piece N°</label>
+        <p> <strong th:text="${visiteurAvecDonnees.pieceNumero}"> </strong> </p>			</div>
+			<div class="form-group m-3">
+				<label >Departement :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.departement}"> </strong> </p>			</div>
+			<div class="form-group m-3">
+				<label >Personne Visité :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.personne_visite}"> </strong> </p>			</div>
+			<div class="form-group m-3">
+				<label >Badge :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.badge}"> </strong> </p>			</div>
+		
+			<div class="form-group m-3">
+				<label >Telephone :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.telephone}"> </strong> </p>			</div>
+		</div>
+		<div class = "col-md-4" >
+			<div class="form-group m-3">
+				<label >Date :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.date}"> </strong> </p>			</div>
+			<div class="form-group m-3">
+				<label >Entrée :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.entree}"> </strong> </p>			</div>
+			<div class="form-group m-3">
+				<label >Sortie :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.sortie}"> </strong> </p>			</div>
+			<div class="form-group m-3">
+				<label> Status : </label>
+        <p> <strong th:text="${visiteurAvecDonnees.status}"> </strong> </p>
+			</div>
+			<div class="form-group m-3">
+				<label >Fournisseur :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.fournisseur}"> </strong> </p>			</div>
+			<div class="form-group m-3">
+				<label >ENTREPRISE :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.entreprise}"> </strong> </p>			</div>
+			<div class="form-group m-3">
+				<label >Type de Vehicule :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.type_vehicule}"> </strong> </p>			</div>
+			<div class="form-group m-3">
+				<label >Immatriculation :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.immatriculation}"> </strong> </p>			</div>
+		</div>
+		<div class = "col-md-4" >
+			<div class="form-group m-3">
+				<label> AGENTS : </label>
+        <p> <strong th:text="${visiteurAvecDonnees.agent}"> </strong> </p>
+			</div>
+			<div class="form-group m-3">
+				<label >Nom Agent :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.nom_agent}"> </strong> </p>			</div>
+			<div class=" form-group m-3">
+				<div class="card" style="width: 18rem;">
+					<img class="card-img-top" th:src="*{'data:image/jpeg;base64,'+{visiteurAvecDonnees.image}}" alt="Pas d'image de profile ou de document">
+					<div class="card-body">
+					  <h5 class="card-title">Photo</h5>
+					</div>
+				  </div>
+				</div>   
+				<div class="form-group m-3" sec:authorize="!isAuthenticated()">
+				<a th:href="@{/modifHeureSortie?(id=${visiteurAvecDonnees.id})}" class="btn btn-success" > Declarer l'Heure de Sortie </a>
+				</div>
+				<div class="form-group m-3" sec:authorize="hasRole('ROLE_ADMIN')">
+				<label >Heure d'Enregistrement :</label>
+        <p> <strong th:text="${visiteurAvecDonnees.heureEnregistrement}"> </strong> </p>			</div>
+		</div>
+		  </form>
+    </div>
+
+      <div sec:authorize="hasRole('ROLE_ADMIN')"  class="row" style="margin-left: 50px;">
+      <form th:action="@{/exportOne}" method="get">
+      <button type="submit" class="btn btn-success" style="margin-left: 10px;"> Imprimer/Exporter Les Informations </button>
+    </form>
+      <form th:action="@{/modifProfile}" method="get">
+      <button type="submit" class="btn btn-primary" style="margin-left: 10px;"> Modifier Les Informations </button>
+    </form>
+      </form>
+        <form th:action="@{/delete}" method="get">
+      <button class="btn btn-danger" style="margin-left: 10px;"> Supprimer Le Profil </button>
+    
+  
+    </div>
+
+	</div>
+<!-- Form de Verification -->
+<!--
+<div class="" style="margin:30px;">
+  <div class="row" style="margin-left: 50px;"> 
+    <div class="col-md-8">
+      <label class="group-list"> ID : <strong th:text="${visiteurAvecDonnees.id}" th:field="*{nom}"> </strong> </label> <br>
+      <label class="group-list"> Nom : <strong th:text="${visiteurAvecDonnees.nom}" th:field="*{prenom}"> </strong> </label> <br>
+      <label class="group-list"> Prenom : <strong th:text="${visiteurAvecDonnees.prenom}"> </strong> </label> <br>
+      <label class="group-list"> Pièce d'identité : <strong th:text="${visiteurAvecDonnees.piece_identite}"> </strong> </label> <br>
+      <label class="group-list"> Piece N° : <strong th:text="${visiteurAvecDonnees.piece_numero}"> </strong> </label> <br>
+      <label class="group-list"> Departement : <strong th:text="${visiteurAvecDonnees.departement}"> </strong> </label> <br>
+      <label class="group-list"> Personne Visité : <strong th:text="${visiteurAvecDonnees.personne_visite}"> </strong> </label> <br>
+      <label class="group-list"> Badge : <strong th:text="${visiteurAvecDonnees.badge}"> </strong> </label> <br>
+      <label class="group-list"> Telephone : <strong th:text="${visiteurAvecDonnees.telephone}"> </strong> </label> <br>
+      <label class="group-list"> Date : <strong th:text="${visiteurAvecDonnees.date}"> </strong> </label> <br>
+      <label class="group-list"> Entrée : <strong th:text="${visiteurAvecDonnees.entree}"> </strong> </label> <br>
+      <label class="group-list"> Sortie : <strong th:text="${visiteurAvecDonnees.sortie}"> </strong> </label> <br>
+      <label class="group-list"> Status : <strong th:text="${visiteurAvecDonnees.status}"> </strong> </label> <br>
+      <label class="group-list"> Fournisseur : <strong th:text="${visiteurAvecDonnees.fournisseur}"> </strong> </label> <br>
+      <label class="group-list"> ENTREPRISE : <strong th:text="${visiteurAvecDonnees.entreprise}"> </strong> </label> <br>
+      <label class="group-list"> Type de Vehicule : <strong th:text="${visiteurAvecDonnees.type_vehicule}"> </strong> </label> <br>
+      <label class="group-list"> Immatriculation : <strong th:text="${visiteurAvecDonnees.immatriculation}"> </strong> </label> <br>
+      <label class="group-list"> AGENTS : <strong th:text="${visiteurAvecDonnees.agent}"> </strong> </label> <br>
+      <label class="group-list"> Nom Agent : <strong th:text="${visiteurAvecDonnees.nom_agent}"> </strong> </label> <br>
+      <div class="row">
+        <form th:action="@{/index}" method="get"> 
+       <button class="btn btn-danger" style="margin-left: 10px;"> Annuler </button> 
+      </form>
+      <form th:action="@{/modif}" method="post">
+      <button type="submit" class="btn btn-primary" style="margin-left: 10px;"> Modifier </button>
+    </form>
+    <form th:action="@{/save}" method="post">
+      <button class="btn btn-success" style="margin-left: 10px;"> Confirmer & Enregistrer </button>
+    </form>
+		</div>  </div>
+	</div>
+    <div class="col-md-4">
+      </div>
+</div> -->
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>Footer</p>
+</div>
+
+</body>
+</html>

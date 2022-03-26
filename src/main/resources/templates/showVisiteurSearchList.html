@@ -1,0 +1,40 @@
+<div th:replace="StartPage"> </div>
+
+<div class="" style="margin:30px;">
+  <form class="form-row" th:action="@{/visiteurProfile}" th:object="${visiteurModel}" method="post">
+    <label class="group-list" style="margin-left: 50px; margin-top: 10px;" > Veuillez Saisir l'ID du Visiteur pour Voir son Profil : </label> <br>
+  <input class="form-control col-md-1 " type="text" style=" margin-left: 20px; margin-right: 10px;" th:field="*{id}" placeholder="Search" >
+    <button type="submit" class="btn btn-primary"> Voir le Profil </button>
+</form>
+<form class="form-row mt-3" th:action="@{/visiteurSearch}" th:object="${visiteurModel}" method="post">
+    <label class="group-list" style="margin-left: 50px; margin-top: 10px;" > Rechercher par Nom ou Prenom : </label> <br>
+  <input  class="form-control mr-sm-2 col-md-2" type="search" placeholder="Search" style=" margin-left: 20px; margin-right: 10px;" th:field="*{nom}" >
+    <button type="submit" class="btn btn-success"> Rechercher </button>
+</form>
+  <div class="row" style="margin-left: 50px; margin-top: 30px;">
+    <div th:each="visiteur:${visiteursList}" class="card" style="width: 15rem; margin-left: 20px;">
+      <img class="card-img-top" th:src="*{'data:image/jpeg;base64,'+{visiteur.image}}" alt="Pas d'image de profile ou de document" style="height: 200px; width: 235px;">
+      <div class="card-body">
+        <div class="row card-title"> 
+        <h6 th:text="${visiteur.prenom}" style="margin-left: 10px; margin-right: 5px;"> </h6>
+        <h6 th:text="${visiteur.nom}"> </h6>  </div>
+        <div class="card-text">
+          <label class="group-list"> ID :  <strong th:text="${visiteur.id}"> </strong> </label> <br> 
+          <label class="group-list"> Telephone : <strong th:text="${visiteur.telephone}"> </strong> </label> <br>
+          <label class="group-list"> Date : <strong th:text="${visiteur.date}"> </strong> </label> <br>
+          <form class="form-row col-md-6" th:action="@{/visiteurProfile?(id=${visiteur.id})}" th:object="${visiteurModel}" method="post">
+   			 <button type="submit" class="btn btn-primary"> Voir le Profil </button>
+		</form >
+        </div>
+      </div>
+    </div>
+		</div>
+	</div>>
+
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>Footer</p>
+</div>
+
+</body>
+</html>

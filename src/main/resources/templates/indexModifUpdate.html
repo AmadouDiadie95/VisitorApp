@@ -1,0 +1,151 @@
+<div th:replace="StartPage"> </div>
+
+<div class="" style="margin:30px;">
+  <div class="row" style="margin-left: 50px;">
+   
+		<form class="form-row form-control-sm" th:action="@{/VisiteurFormReceive}" th:object="${visiteurVide}" method="post" enctype="multipart/form-data">
+			<div class = "col-md-4">
+			<div class="form-group m-3">
+				<label>ID : </label>
+				<input type="text" class="form-control" th:field="*{id}" required readOnly> 
+			  </div>
+			  <div class="form-group m-3">
+				<label>Nom : </label>
+				<input type="text" class="form-control" th:field="*{nom}" required > 
+			  </div>
+			  <div class="form-group m-3">
+				<label>Prenom :</label>
+				<input type="text" class="form-control"  th:field="*{prenom}" required>
+			  </div>
+			  <div class="form-group m-3"> 
+			<label>Pièce d'identité :</label> <br>
+			<select class="custom-select" th:field="*{piece_identite}">
+				<option value="Nationnal" selected> Nationnal </option>
+				<option value="NINA"> NINA </option>
+				<option value="Passport"> Passport </option>
+				<option value="Carte Consulaire"> Consulaire </option>
+				<option value="Permis"> Permis </option>
+			  </select>
+			</div>
+			<div class="form-group m-3">
+			  <label >Piece N°</label>
+			  <input type="text" class="form-control"  th:field="*{pieceNumero}">
+			</div>
+			<div class="form-group m-3">
+				<label >Departement :</label>
+				<select class="custom-select" th:field="*{departement}">
+				<option value="CUISINE" selected> CUISINE  </option>
+				<option value="FRONT-OFFICE"> FRONT-OFFICE </option>
+				<option value="IT"> IT </option>
+				<option value="TECHNIQUE"> TECHNIQUE </option>
+				<option value="RH (RESSOURCE HUMAINE)"> RH (RESSOURCE HUMAINE) </option>
+				<option value="FINANCE"> FINANCE </option>
+				<option value="SECURITE"> SECURITE </option>
+			  </select>
+			</div>
+			<div class="form-group m-3">
+				<label >Personne Visité :</label>
+				<input type="text" class="form-control" th:field="*{personne_visite}">
+			</div>
+			<div class="form-group m-3">
+				<label >Badge :</label>
+				<input type="text" class="form-control" th:field="*{badge}">
+			</div>
+		
+			<div class="form-group m-3">
+				<label >Telephone :</label>
+				<input type="text" class="form-control" th:field="*{telephone}">
+			</div>
+		</div>
+		<div class = "col-md-4" >
+			<div class="form-group m-3">
+				<label >Date :</label>
+				<input type="date" class="form-control" th:field="*{date}" required>
+			</div>
+			<div class="form-group m-3">
+				<label >Entrée :</label>
+				<input type="text" class="form-control" th:field="*{entree}" required>
+			</div>
+			<div class="form-group m-3">
+				<label >Sortie :</label>
+				<input type="text" class="form-control" th:field="*{sortie}" >
+			</div>
+			<div class="form-group m-3">
+				<label> Status : </label>
+			<select class="custom-select" th:field="*{status}">
+				<option selected value="IN"> IN </option>
+				<option value="OUT"> OUT </option>
+			</select>
+			</div>
+			<div class="form-group m-3">
+				<label >Fournisseur :</label>
+				<input type="text" class="form-control"  th:field="*{fournisseur}">
+			</div>
+			<div class="form-group m-3">
+				<label >ENTREPRISE :</label>
+				<input type="text" class="form-control" th:field="*{entreprise}">
+			</div>
+			<div class="form-group m-3">
+				<label >Type de Vehicule :</label>
+				<input type="text" class="form-control"  th:field="*{type_vehicule}">
+			</div>
+			<div class="form-group m-3">
+				<label >Immatriculation :</label>
+				<input type="text" class="form-control" th:field="*{immatriculation}">
+			</div>
+		</div>
+		<div class = "col-md-4" >
+			<div class="form-group m-3">
+				<label> AGENTS : </label>
+			<select class="custom-select" th:field="*{agent}">
+				<option value="SECURICOM" selected> SECURICOM </option>
+			</select>
+			</div>
+			<div class="form-group m-3">
+				<label >Nom Agent :</label>
+				<input type="text" class="form-control" th:field="*{nom_agent}">
+			</div>
+			<div class=" form-group m-3">
+				<div class="card" style="width: 18rem;">
+					<img class="card-img-top"  id="profile" th:src="*{'data:image/jpeg;base64,'+{image}}" alt="Pas d'image de profile ou de document">
+					<div class="card-body"> 
+                <h5 class="card-title">Photo</h5>
+				<div class="custom-file">
+				<input id="image" type="file" name="file" placeholder="Photo" class="custom-file-input" th:field="*{file}"  capture>
+				<label class="custom-file-label" ></label>
+				</div>
+                
+            </div>
+				</div>
+				<script src="jquery.min.js"></script>
+				<script>
+					$("#image").change(function() {
+  readURL(this);
+  //other uploading proccess [server side by ajax and form-data ]
+});
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#profile').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+				</script> <br/>
+	 		<button type="submit" class="btn btn-success" style=" width: 550px; height: 50px;">Mettre a Jour</button>
+		</div>
+		  </form>
+		</div>
+	</div>
+
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>Footer</p>
+</div>
+
+</body>
+</html>
